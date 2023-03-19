@@ -1,0 +1,63 @@
+html {
+	font-size: 16px;
+}
+
+* {
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+.testingPage {
+	padding: 20px;
+	display: flex;
+	justify-content: center;
+	height: 100vh;
+}
+
+.container {
+	max-width: 1140px;
+	margin: auto;
+}
+
+.usage>h2 {
+	margin: 15px 0px;
+	font-weight: 500;
+}
+
+.testingArea {
+	background-color: #f7f7f7;
+	padding: 20px 20px;
+}
+
+.usage {
+	padding: 10px 20px;
+	border-radius: 15px;
+	background-color: transparent;
+}
+
+ul {
+	list-style-position: inside;
+	font-size: 20px;
+	margin: 10px 0px 0px 10px;
+}
+
+.title {
+	display: inline-block;
+}
+
+p {
+	padding-left: 30px;
+}
+
+.myLabel {
+	display: flex;
+}
+
+.myLabel div {
+	text-align: center;
+	margin-right: 5px;
+	display: flex;
+	align-items: center;
+}
