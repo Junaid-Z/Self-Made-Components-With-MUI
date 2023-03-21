@@ -34,6 +34,10 @@ let components = [
     {
         title: "Grid Form",
         url: "form"
+    },
+    {
+        title: "Table",
+        url: "table"
     }
 ]
 export default components;

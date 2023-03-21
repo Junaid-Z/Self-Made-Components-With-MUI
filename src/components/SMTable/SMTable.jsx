@@ -2,14 +2,18 @@ import { useState } from "react";
 import SMInput from "../SMInput";
 import filterRow from "./functions";
 import SMSelect from "../SMSelect";
-function SMTable(props) {
-	let { style, data, onRowClick, cols, limit, borderStyle } = props;
+function SMTable({ style, data, onRowClick, cols, limit, colStyle, searchBarStyle }) {
 	let [searchTerm, setSearchTerm] = useState();
 	let [searchCat, setSearchCat] = useState('');
 	return (
 		<>
-			<div className="tableFilter" style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", marginBottom: "20px" }}>
-				<SMInput type="text" placeholder="search" onChange={(e) => { setSearchTerm(e.target.value) }} value={searchTerm} label='Search' />
+			<div className="tableFilter" style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", marginBottom: "20px", ...searchBarStyle }}>
+				<SMInput
+					type="text"
+					placeholder="search"
+					onChange={(e) => { setSearchTerm(e.target.value) }}
+					value={searchTerm}
+					label='Search' />
 				<SMSelect
 					style={{ minWidth: "200px", ml: "20px" }}
 					displayEmpty={false}
@@ -19,11 +23,11 @@ function SMTable(props) {
 					options={[{ value: "", displayName: "All Columns" }, ...cols]}
 				/>
 			</div>
-			<table style={{ ...style, ...borderStyle, borderSpacing: "0px", }} >
+			<table style={{ ...style, borderSpacing: "0px", }} >
 				<thead>
 					<tr >
 						{cols.map((col, i) => {
-							return (<th style={{ ...borderStyle, letterSpacing: "1px", textAlign: 'start', padding: "10px 10px" }} key={i}>{col.displayName}</th>)
+							return (<th style={{ ...colStyle, letterSpacing: "1px", textAlign: 'start', padding: "10px 10px" }} key={i}>{col.displayName}</th>)
 						})}
 					</tr>
 				</thead>
@@ -45,7 +49,7 @@ function SMTable(props) {
 										{cols.map((col, cI) => {
 											return (<td
 												key={cI}
-												style={{ ...borderStyle, textAlign: 'start', padding: "10px 10px" }}
+												style={{ ...colStyle, textAlign: 'start', padding: "10px 10px" }}
 											>
 												{value[col.value]}
 											</td>)

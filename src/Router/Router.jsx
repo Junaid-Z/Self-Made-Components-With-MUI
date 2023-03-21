@@ -11,6 +11,7 @@ import RadioAPI from "../Pages/APIS/RadioAPI";
 import SnackbarAPI from "../Pages/APIS/SnackbarAPI";
 import ModalAPI from "../Pages/APIS/ModalAPI";
 import GridFormAPI from "../Pages/APIS/FormAPI";
+import TableAPI from "../Pages/APIS/TableAPI";
 export default function MyRouter() {
 	return (
 		<BrowserRouter>
@@ -25,6 +26,7 @@ export default function MyRouter() {
 					<Route path="snackbar" element={<SnackbarAPI />}></Route>
 					<Route path="modal" element={<ModalAPI />}></Route>
 					<Route path="form" element={<GridFormAPI />}></Route>
+					<Route path="table" element={<TableAPI />}></Route>
 				</Route>
 				<Route path="/testing" element={<TestingPage />} />
 			</Routes>
