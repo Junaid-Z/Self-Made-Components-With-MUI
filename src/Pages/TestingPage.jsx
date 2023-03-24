@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SMButton from "../components/SMButton";
 import SMInput from "../components/SMInput";
 import SMTable from "../components/SMTable/SMTable";
@@ -12,12 +12,95 @@ import SMModal from "../components/SMModal";
 import SMSnackbar from "../components/SMSnackbar";
 import SMForm from "../components/SMForm";
 import { Box, Grid } from "@mui/material";
+import {
+	signUp,
+	signIn,
+	deleteData,
+	updateData,
+	setData,
+	subscribe,
+	getData
+} from "../Firebase/FirebaseFunctions";
+import { width } from "@mui/system";
 
 function TestingPage(props) {
-	let [value, setValue] = useState(false);
+	let [value, setValue] = useState({});
+	useEffect(() => {
+		subscribe('TODOS', (snapshot) => { setValue(snapshot.val()) })
+	}, [])
+	const logData = () => {
+		getData('TODOS').then((d) => { console.log(d.val()) })
+	}
 	return (
-		<div className="testingPage" >
-			<Grid item sx={{ margin: 'auto' }} xs={12} sm={10} md={8} lg={6} xl={4}>
+
+
+
+		< div className="testingPage" >
+			<div style={{ textAlign: 'center' }}>
+				<div>
+					{JSON.stringify(value)}
+				</div>
+				<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+					<SMButton
+						style={{ display: 'block', width: '200px', marginTop: '20px', padding: '10px' }}
+						variant={'contained'}
+						label={'Set Data'}
+						onClick={() => { setData('TODOS', { a: 2, b: 3 }) }} />
+
+					<SMButton
+						style={{ display: 'block', width: '200px', marginTop: '20px', padding: '10px' }}
+						variant={'contained'}
+						label={'Log Data'}
+						onClick={() => { logData() }} />
+
+					<SMButton
+						style={{ display: 'block', width: '200px', marginTop: '20px', padding: '10px' }}
+						variant={'contained'}
+						label={'Update Data'}
+						onClick={() => { updateData('TODOS/-NRIcGRIjSyoE81HOpKY', { a: 5, b: 7 }) }} />
+
+					<SMButton
+						style={{ display: 'block', width: '200px', marginTop: '20px', padding: '10px' }}
+						variant={'contained'}
+						label={'Delete Data'}
+						onClick={() => { deleteData('TODOS') }} />
+
+					<SMButton
+						style={{ display: 'block', width: '200px', marginTop: '20px', padding: '10px' }}
+						variant={'contained'}
+						label={'Sign Up'}
+						onClick={() => {
+							signUp({ email: "123@123.com", password: '112233' })
+								.then((res) => {
+									console.log(res.user.uid);
+									setData(('users/'), {
+										id: res.user.uid
+									})
+								}).catch((err) => {
+									console.log(err);
+								})
+						}} />
+
+					<SMButton
+						style={{ display: 'block', width: '200px', marginTop: '20px', padding: '10px' }}
+						variant={'contained'}
+						label={'Sign In'}
+						onClick={() => {
+							signIn({ email: "123@123.com", password: '112233' })
+								.then((res) => {
+									console.log(res.user.uid);
+								}).catch((err) => {
+									console.log(err);
+								})
+						}} />
+				</div>
+			</div>
+
+
+
+
+			{/* <Grid item sx={{ margin: 'auto' }} xs={12} sm={10} md={8} lg={6} xl={4}>
+
 				<SMForm
 					button={
 						<Grid item sx={{ margin: 'auto' }} xs={12} sm={12} lg={12} xl={12}>
@@ -66,22 +149,7 @@ function TestingPage(props) {
 							xsWidth: 12
 						}
 					]} />
-			</Grid>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+			</Grid> */}
 
 			{/* <SMSnackbar
 				open={value}
